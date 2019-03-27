@@ -55,6 +55,24 @@
     <audio data-key="75" src="sounds/tom.wav"></audio>
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
-    <script></script>
+    <script>
+      window.addEventListener('keydown', event => {
+        const audio = document.querySelector(
+          `audio[data-key="${event.keyCode}"]`
+        )
+        const key = document.querySelector(`.key[data-key="${event.keyCode}"]`)
+
+        // Play audio
+        if (!audio) return // Stop if button is pressed that doesn't correspond to audio
+        audio.currentTime = 0 // Reset audio to start
+        audio.play()
+
+        // Change styling
+        key.classList.add('playing')
+        setTimeout(() => {
+          key.classList.remove('playing')
+        }, 100)
+      })
+    </script>
   </body>
 </html>
